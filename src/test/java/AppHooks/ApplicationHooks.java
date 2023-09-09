@@ -10,6 +10,8 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +26,9 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 public class ApplicationHooks {
+	
+	public static final Logger logger = LogManager.getLogger(ApplicationHooks.class); 
+	
 	private DriverFactory driverFactory;
 	public static WebDriver driver;
 	private ConfigReader configReader;
@@ -48,7 +53,7 @@ public class ApplicationHooks {
 
 	@Before(order=0)
 	public void getProperty() {
-		System.out.println("In Before - Current Time : "+twelveHour);
+		logger.info("In Before - Current Time : "+twelveHour);
 		configReader = new ConfigReader();
 		prop=configReader.init_prop();
 	}
@@ -60,17 +65,14 @@ public class ApplicationHooks {
 		driver=driverFactory.init_driver(browserName);
 	}
 
-	@Before(order=2)
-	public void getTestContext() {
-		System.out.println("In Before step");
-
-		
-
-	}
+//	@Before(order=2)
+//	public void getTestContext() {
+//		logger.info("In Before step");
+//	}
 	
 	@After(order=0)
 	public void quitBrowser() {
-		System.out.println("In After");
+		logger.info("In After");
 		driver.quit();
 	}
 
@@ -84,7 +86,6 @@ public class ApplicationHooks {
 				captureScreenshotAsFile(screenshotName,driver);
 			} catch (Throwable e) {
 				e.printStackTrace();
-
 			}		
 		}
 	}

@@ -6,11 +6,15 @@
 	<artifactId>BDDFrameworkProjectTemplate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BDDFrameworkProjectTemplate</name>
-	<description>Template project structure and utility features for BDD Framework</description>
+	<description>Template project structure and utility features for BDD
+		Framework</description>
 	<properties>
-		<FrameWorkUtilityPath>${env.USERPROFILE}\eclipse-workspace\WebAutomationUtility\target\WebAutomationUtility-0.0.1-SNAPSHOT.jar</FrameWorkUtilityPath>
+		<FrameWorkUtilityPath>
+			${env.USERPROFILE}\eclipse-workspace\WebAutomationUtility\target\WebAutomationUtility-0.0.1-SNAPSHOT.jar</FrameWorkUtilityPath>
+		<java.version>17</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
 		<junit.version>4.13.1</junit.version>
 		<cucumber.version>6.9.0</cucumber.version>
 		<maven.compiler.version>3.8.1</maven.compiler.version>
@@ -23,12 +27,12 @@
 		</repository>
 	</repositories>
 	<dependencies>
-		
-		<!-- https://mvnrepository.com/artifact/com.github.ralfstuckert.pdfbox-layout/pdfbox2-layout -->
+
+		<!--https://mvnrepository.com/artifact/com.github.ralfstuckert.pdfbox-layout/pdfbox2-layout -->
 		<dependency>
 			<groupId>com.github.ralfstuckert.pdfbox-layout</groupId>
 			<artifactId>pdfbox2-layout</artifactId>
-			<version>0.8.6</version>
+			<version>0.9.0</version>
 		</dependency>
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -60,11 +64,11 @@
 
 		<!-- use this for webdriver manager, but this requires Java 11+  -->
 		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-http-jdk-client -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-http-jdk-client</artifactId>
 			<version>4.11.0</version>
-		</dependency>
+		</dependency>-->
 		<!--https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -81,14 +85,9 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>7.8.0</version>
-			<scope>compile</scope>
+			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>io.github.bonigarcia</groupId>
-			<artifactId>webdrivermanager</artifactId>
-			<version>4.2.2</version>
-		</dependency>
-
+	
 		<dependency>
 			<groupId>tech.grasshopper</groupId>
 			<artifactId>extentreports-cucumber6-adapter</artifactId>
@@ -99,7 +98,7 @@
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
-			<version>5.0.9</version>
+			<version>5.1.0</version>
 		</dependency>
 
 		<dependency>
@@ -132,6 +131,13 @@
 			<version>0.7.7.0</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.24.2</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>com.iks</groupId>
 			<artifactId>FrameWorkUtilities</artifactId>

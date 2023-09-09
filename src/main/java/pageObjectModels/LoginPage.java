@@ -44,7 +44,7 @@ public class LoginPage extends BasePage{
 	 * @param userType
 	 * @return
 	 */
-	public HashMap<String, String> getUserCredential(String userType,String loginType) {
+	public HashMap<String, String> getUserCredential(String loginType) {
 
 		String path = System.getProperty("driverFilePath");
 		ExcelUtilities excelUtil = new ExcelUtilities(path);
@@ -53,7 +53,7 @@ public class LoginPage extends BasePage{
 		// Get Sheet Object
 		Sheet sheetObject = excelUtil.getSheetObject("LoginTestData");
 
-		String[][] searchData={{"UserType",userType}, {"LoginType",loginType}};
+		String[][] searchData={{"LoginType",loginType}};
 		ArrayList<HashMap<String, String>> rowData = null;
 		try {
 			rowData = ExcelUtilities.getAllRowsData(sheetObject,searchData);
@@ -66,8 +66,7 @@ public class LoginPage extends BasePage{
 		map.put("Password", EncryptDecrypt.encryptString(rowData.get(0).get("Password")));
 		return map;
 	}
-	
-	
+
 	/**
 	 * Login To Pluralsight application
 	 * @param <T>
@@ -75,17 +74,24 @@ public class LoginPage extends BasePage{
 	 * @param userType
 	 * @return
 	 */
-	public SearchPage loginToPluralsightApplication(LoginPage loginPage,String userType,String loginType) {
+	public SearchPage loginToPluralsightApplication(String loginType) {
 		// Get User Credential
-		HashMap<String, String> usercredential = getUserCredential(userType,loginType);
-	
+		HashMap<String, String> usercredential = getUserCredential(loginType);
+
 		//Login pluralsight application
-		SearchPage searchpage = loginPage.pluralsightApplicationLogin( usercredential.get("Username"), usercredential.get("Password"));
+		SearchPage searchpage = pluralsightApplicationLogin( usercredential.get("Username"), usercredential.get("Password"));
 		logger.info("Successfully Login To Pluralsight Application");
 		return searchpage;
 	}
-	
-	
+
+	/**
+	 * Wait For Login Form To Be Visible
+	 */
+	public void waitForLoginFormToBeVisible() {
+		// Wait till the login page is visible
+		WebElementUtlities.explicitWaitForElementToBeVisible(driver,loginForm);
+	}
+
 	/**
 	 * Pluralsight Application Login
 	 * @param userName
@@ -93,9 +99,6 @@ public class LoginPage extends BasePage{
 	 * @return
 	 */
 	public SearchPage pluralsightApplicationLogin(String username, String password) { //<T extends BasePage>T
-
-		// Wait till the login page is visible
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver,loginForm);
 
 		//Decrpyt & Enter Username 
 		enterUsername(EncryptDecrypt.decryptString(username));
@@ -115,34 +118,31 @@ public class LoginPage extends BasePage{
 		handleAlertOnFinish(driver);
 		return new SearchPage(driver);
 	}
-	
-	
+
 	/**
 	 * Check Negative Login Scenarios
-	 * @param loginPage
 	 * @param userType
 	 * @param loginType
-	 * @return
 	 */
-	public String checkNegativeLoginScenarios(LoginPage loginPage, String username, String password) {
-		
+	public void checkNegativeLoginScenarios(String username, String password) {
+
 		//Login pluralsight application
-		return loginPage.pluralsightApplicationNegativeLoginScenarios(username, password);
+		pluralsightApplicationNegativeLoginScenarios(username, password);
 	}
-	
 
 	/**
 	 * Pluralsight Application Negative Login Scenarios
 	 * @param username
 	 * @param password
-	 * @return
 	 */
-	public String pluralsightApplicationNegativeLoginScenarios(String username, String password) {
+	public void pluralsightApplicationNegativeLoginScenarios(String username, String password) {
 
 		refreshPage();
 
 		// Wait till the login page is visible
 		WebElementUtlities.explicitWaitForElementToBeVisible(driver,loginForm);
+
+		customWaitInSec(1);
 
 		// Enter User name
 		enterUsername(username);
@@ -152,7 +152,13 @@ public class LoginPage extends BasePage{
 
 		// Click on Login
 		clickLogin();
+	}
 
+	/**
+	 * Get Login Error Text
+	 * @return
+	 */
+	public String getLoginErrorText() {
 		//Header ribbon text
 		String ribbonText = getHeaderRibbonText();
 

@@ -7,7 +7,7 @@ import io.cucumber.datatable.DataTable;
 
 public class ExcelDataToDataTable {
 	public DataTable transform(String sheet) throws Throwable {
-		String excelPath = System.getProperty("user.dir")+"\\test-data\\InputSheet.xlsx";
+		String excelPath = System.getProperty("user.dir")+"\\src\\test\\resources\\testdata\\TestData.xlsx";
 		ExcelConfiguration reader = new ExcelConfiguration.ExcelReaderBuilder()
 				.setFileLocation(excelPath)
 				.setSheet(sheet)

@@ -51,7 +51,7 @@ public class BasePage {
 
 	/**
 	 * move To Home Page
-	 * @return
+	 * @return HomePage
 	 */
 	public HomePage moveToHomePage() {
 		navigateToDifferentPage("https://nirajt03.github.io/sample-website/HomePage.html");
@@ -60,12 +60,11 @@ public class BasePage {
 	
 	/**
 	 * Logout From Pluralsight Application
-	 * @return
+	 * @return LoginPage
 	 */
 	public LoginPage logoutFromPluralsightApplication() {
 
 		WebElementUtlities.explicitWaitForElementToBeVisible(driver, logoutIcon);
-
 		WebElementUtlities.click(driver, driver.findElement(logoutIcon));
 		logger.info("Logout button clicked");
 		handleAlert(driver);
@@ -85,7 +84,7 @@ public class BasePage {
 
 	/**
 	 * Get Site Header Text
-	 * @return
+	 * @return String
 	 */
 	public String getSiteHeaderText() {
 		return WebElementUtlities.getAttributeByValue(driver, driver.findElement(pluralsightIcon));
@@ -93,7 +92,7 @@ public class BasePage {
 
 	/**
 	 * get Course Link Text
-	 * @return
+	 * @return String
 	 */
 	public String getCourseLinkText() {
 		return WebElementUtlities.getAttributeByValue(driver, driver.findElement(coursesLink));
@@ -101,7 +100,7 @@ public class BasePage {
 
 	/**
 	 * get Search Placeholder Text
-	 * @return
+	 * @return String
 	 */
 	public String getSearchPlaceholderText() {
 		return WebElementUtlities.getAttributeUsingValue(driver, driver.findElement(headerSearchBox),"placeholder");
@@ -109,7 +108,7 @@ public class BasePage {
 
 	/**
 	 * get Started Icon Text
-	 * @return
+	 * @return String
 	 */
 	public String getStartedIconText() {
 		return WebElementUtlities.getAttributeByValue(driver, driver.findElement(headerSearchBox));

@@ -51,6 +51,15 @@ public class CoursePage extends BasePage {
 	}
 	
 	/**
+	 * Get Course Author Name
+	 * @return
+	 */
+	public String getCourseAuthorName() {
+		WebElementUtlities.explicitWaitForElementToBeVisible(driver, authorLink, 10);
+		return WebElementUtlities.getText(driver, authorLink);
+	}
+	
+	/**
 	 * get Free Trail Button Text
 	 * @return
 	 */

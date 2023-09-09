@@ -1,5 +1,7 @@
 package driverfactory;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,10 +10,13 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+
 public class DriverFactory {
 	public WebDriver driver;
 
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
+	public static final Logger logger = LogManager.getLogger(DriverFactory.class);
+
 
 	/**
 	 * This method is used to initialize the thradlocal driver on the basis of given
@@ -22,7 +27,7 @@ public class DriverFactory {
 	 */
 	public WebDriver init_driver(String browser) {
 
-		System.out.println("browser value is: " + browser);
+		logger.info("browser value is: " + browser);
 
 		WebDriver driver = null;
 		if (browser.equalsIgnoreCase("Chrome")) {
@@ -31,17 +36,21 @@ public class DriverFactory {
 			options.addArguments("--incognito");
 
 			options.setBinary("116");
+			//options.setBrowserVersion("116");
 			driver = new ChromeDriver(options);
+			tlDriver.set(driver);
 		} else if (browser.equalsIgnoreCase("Firefox")) {
 			FirefoxOptions options = new FirefoxOptions();
 			options.addArguments("-private");
 			driver = new FirefoxDriver(options);
+			tlDriver.set(driver);
 		} else if (browser.equalsIgnoreCase("Edge")) {
 			EdgeOptions options = new EdgeOptions();
 			options.addArguments("-private");
 			driver = new EdgeDriver(options);
+			tlDriver.set(driver);
 		} else {
-			System.out.println("Please pass the correct browser value. Browser passed was : " + browser);
+			logger.info("Please pass the correct browser value. Browser passed was : " + browser);
 		}
 
 		driver.manage().deleteAllCookies();

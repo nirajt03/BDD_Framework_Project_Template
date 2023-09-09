@@ -18,13 +18,19 @@ public class HomePage extends BasePage{
 	private By homePageHeader = By.xpath("//div[@id='content']//h1");
 	private By homePageDescription = By.xpath("//div[@id='content']//p");
 	
+	/**
+	 * Wait For Home Page To Be Visible
+	 */
+	public void waitForHomePageToBeVisible() {
+		customWaitInSec(1);
+		WebElementUtlities.explicitWaitForElementToBeVisible(driver, homePageHeader, 15);
+	}
 	
 	/**
 	 * get Home Page Header
 	 * @return
 	 */
 	public String getHomePageHeader() {
-		customWaitInSec(1);
 		WebElementUtlities.explicitWaitForElementToBeVisible(driver, homePageHeader, 15);
 		return WebElementUtlities.getText(driver, driver.findElement(homePageHeader));
 	}
