@@ -36,16 +36,17 @@ import screenRecorderUtilities.ScreenRecorderUtil;
 import screenRecorderUtilities.ScreenRecorderUtil.TypeOfScreen;
 
 @CucumberOptions(
-		features=".//src/test/resources/features/01 LoginPage.feature",
+		features=".//src/test/resources/features/",
 		//features=".//src/test/resources/features/04 SearchPage.feature",
 		glue={"stepDefinitions","AppHooks"},
 		dryRun=false,
-		tags="@Custom",
-		monochrome = true,
+		//tags="@Custom",
+		monochrome = true,		
 		plugin = {"pretty",
 					"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
 				 }
 		)
+
 
 public class TestRunner extends AbstractTestNGCucumberTests{
 
