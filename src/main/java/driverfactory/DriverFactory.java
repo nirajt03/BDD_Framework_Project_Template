@@ -7,9 +7,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.safari.SafariDriver;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class DriverFactory {
 	public WebDriver driver;
@@ -32,17 +29,8 @@ public class DriverFactory {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("start-maximized");
 			options.addArguments("--incognito");
-			//options.addArguments("--remote-allow-origins=*");	
+
 			options.setBinary("116");
-			//options.setBrowserVersion("116");
-
-			//Map<String, Object> prefs = new HashMap<>();
-			// enable/disable mic or camera permissions
-			//prefs.put("profile.default_content_setting_values.media_stream_mic", 2);
-			//value "1" is used for allowing the option, "2" -- for blocking.
-			//prefs.put("profile.default_content_setting_values.media_stream_camera", 1);
-			//options.setExperimentalOption("prefs", prefs);
-
 			driver = new ChromeDriver(options);
 		} else if (browser.equalsIgnoreCase("Firefox")) {
 			FirefoxOptions options = new FirefoxOptions();
