@@ -36,21 +36,18 @@ import screenRecorderUtilities.ScreenRecorderUtil;
 import screenRecorderUtilities.ScreenRecorderUtil.TypeOfScreen;
 
 @CucumberOptions(
-		features={".//src/test/resources/features/01 LoginPage.feature"},
-		//features=".//src/test/resources/features/04 SearchPage.feature",
+
+		plugin = {"pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
+				"rerun:target/failedrerun.txt"
+				},
 		glue={"stepDefinitions","AppHooks"},
-		dryRun=false,
-		tags="@Custom",
-		monochrome = true,		
-		plugin = {"pretty",
-					"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-					"rerun:target/failedrerun.txt"
-				 }
+		monochrome = true,			
+		features={"@target/failedrerun.txt"}
 		)
 
-public class TestRunner extends AbstractTestNGCucumberTests{
+public class FailedRun extends AbstractTestNGCucumberTests{
 
-	public static final Logger logger = LogManager.getLogger(TestRunner.class);
+	public static final Logger logger = LogManager.getLogger(FailedRun.class);
 
 	@BeforeSuite(alwaysRun = true)
 	public void beforeSuite() {

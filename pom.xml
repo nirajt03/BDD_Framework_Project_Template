@@ -6,9 +6,11 @@
 	<artifactId>BDDFrameworkProjectTemplate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BDDFrameworkProjectTemplate</name>
-	<description>Template project structure and utility features for BDD Framework</description>
+	<description>Template project structure and utility features for BDD
+		Framework</description>
 	<properties>
-		<FrameWorkUtilityPath>${env.USERPROFILE}\eclipse-workspace\WebAutomationUtility\target\WebAutomationUtility-0.0.1-SNAPSHOT.jar</FrameWorkUtilityPath>
+		<FrameWorkUtilityPath>
+			${env.USERPROFILE}\eclipse-workspace\WebAutomationUtility\target\WebAutomationUtility-0.0.1-SNAPSHOT.jar</FrameWorkUtilityPath>
 		<java.version>17</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
@@ -25,12 +27,7 @@
 		</repository>
 	</repositories>
 	<dependencies>
-		<!--https://mvnrepository.com/artifact/com.github.ralfstuckert.pdfbox-layout/pdfbox2-layout -->
-		<dependency>
-			<groupId>com.github.ralfstuckert.pdfbox-layout</groupId>
-			<artifactId>pdfbox2-layout</artifactId>
-			<version>0.9.0</version>
-		</dependency>
+
 		<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
@@ -86,7 +83,7 @@
 			<artifactId>selenium-http-jdk-client</artifactId>
 			<version>4.11.0</version>
 		</dependency>-->
-		
+
 		<!--https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -99,7 +96,7 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.20.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
@@ -177,12 +174,12 @@
 				<version>${maven.surefire.version}</version>
 				<configuration>
 					<includes>
-						<include>**/ParallelRun.java</include>
+						<include>**/TestRunner.java</include>
 					</includes>
 					<parallel>methods</parallel>
 					<threadCount>2</threadCount>
-					 <perCoreThreadCount>false</perCoreThreadCount>
-					<useUnlimitedThreads>true</useUnlimitedThreads>
+					<useUnlimitedThreads>false</useUnlimitedThreads>
+					<!-- <rerunFailingTestsCount>2</rerunFailingTestsCount> -->
 				</configuration>
 			</plugin>
 		</plugins>

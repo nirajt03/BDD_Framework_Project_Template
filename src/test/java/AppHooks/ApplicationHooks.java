@@ -87,7 +87,16 @@ public class ApplicationHooks {
 			} catch (Throwable e) {
 				e.printStackTrace();
 			}		
-		}
+		} 
+//		else {
+//			scenario.getStatus();
+//			if(io.cucumber.java.Status.SKIPPED != null) {
+//				String screenshotName = scenario.getName().replaceAll(" ", "_");
+//				ExtentCucumberAdapter.getCurrentStep().log(Status.SKIP,screenshotName +" "+twelveHour,MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshotAsBase64(driver)).build());
+//				ExtentCucumberAdapter.addTestStepLog("Screenshot is attached");
+//				captureScreenshotAsFile(screenshotName,driver);
+//			}
+//		}
 	}
 	
 	/**
