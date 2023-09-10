@@ -1,9 +1,9 @@
 package testrunners;
 
-import static AppHooks.ApplicationHooks.dateMonthYear;
-import static AppHooks.ApplicationHooks.driver;
-import static AppHooks.ApplicationHooks.monthYear;
-import static AppHooks.ApplicationHooks.year;
+import static appHooks.ApplicationHooks.dateMonthYear;
+import static appHooks.ApplicationHooks.driver;
+import static appHooks.ApplicationHooks.monthYear;
+import static appHooks.ApplicationHooks.year;
 
 import java.awt.Desktop;
 import java.io.File;

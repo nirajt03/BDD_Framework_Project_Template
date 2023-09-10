@@ -1,4 +1,4 @@
-package AppHooks;
+package appHooks;
 
 import java.io.File;
 import java.io.FileInputStream;
