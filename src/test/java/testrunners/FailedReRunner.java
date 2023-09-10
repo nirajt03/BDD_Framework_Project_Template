@@ -45,9 +45,9 @@ import screenRecorderUtilities.ScreenRecorderUtil.TypeOfScreen;
 		features={"@target/failedrerun.txt"}
 		)
 
-public class FailedRun extends AbstractTestNGCucumberTests{
+public class FailedReRunner extends AbstractTestNGCucumberTests{
 
-	public static final Logger logger = LogManager.getLogger(FailedRun.class);
+	public static final Logger logger = LogManager.getLogger(FailedReRunner.class);
 
 	@BeforeSuite(alwaysRun = true)
 	public void beforeSuite() {
