@@ -6,11 +6,9 @@
 	<artifactId>BDDFrameworkProjectTemplate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BDDFrameworkProjectTemplate</name>
-	<description>Template project structure and utility features for BDD
-		Framework</description>
+	<description>Template project structure and utility features for BDD Framework</description>
 	<properties>
-		<FrameWorkUtilityPath>
-			${env.USERPROFILE}\eclipse-workspace\WebAutomationUtility\target\WebAutomationUtility-0.0.1-SNAPSHOT.jar</FrameWorkUtilityPath>
+		<FrameWorkUtilityPath>${env.USERPROFILE}\eclipse-workspace\WebAutomationUtility\target\WebAutomationUtility-0.0.1-SNAPSHOT.jar</FrameWorkUtilityPath>
 		<java.version>17</java.version>
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
