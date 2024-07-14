@@ -16,12 +16,12 @@ import io.cucumber.java.en.When;
 public class LoginPageStepDefinition {
 
 	public static final Logger logger = LogManager.getLogger(LoginPageStepDefinition.class);
-	LoginPage loginpage = new LoginPage(DriverFactory.getDriver());
+	LoginPage loginpage = new LoginPage(DriverFactory.getInstance().getDriver());
 	SearchPage searchpage;
 
 	@Given("User launches the Pluralsight Clone Application using link {string}")
 	public void user_launches_the_pluralsight_clone_application_using_link(String url) {
-		DriverFactory.getDriver().get(url);
+		DriverFactory.getInstance().getDriver().get(url);
 	}
 
 	@Given("Login form should be visible on launch application URL")

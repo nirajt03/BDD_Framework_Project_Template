@@ -15,10 +15,12 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.cucumber.adapter.*;
+import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
 
+import driverfactory.BrowserFactory;
 import driverfactory.DriverFactory;
 import helperUtility.ConfigReader;
 import io.cucumber.java.After;
@@ -33,6 +35,7 @@ public class ApplicationHooks {
 	public static WebDriver driver;
 	private ConfigReader configReader;
 	Properties prop;
+	protected BrowserFactory bf = new BrowserFactory();
 
 	static LocalDateTime currentDateTime = LocalDateTime.now();  
 
@@ -61,8 +64,10 @@ public class ApplicationHooks {
 	@Before(order=1)
 	public void launchBrowser(Scenario scenario) {
 		String browserName = prop.getProperty("browser");
-		driverFactory = new DriverFactory();
-		driver=driverFactory.init_driver(browserName);
+		DriverFactory.getInstance().setDriver(bf.createBrowserInstance(browserName));
+		driver = DriverFactory.getInstance().getDriver();
+		//driverFactory = new DriverFactory();
+        //driver=driverFactory.init_driver(browserName);
 	}
 
 //	@Before(order=2)

@@ -27,20 +27,20 @@ import org.testng.annotations.BeforeSuite;
 
 import com.aventstack.extentreports.service.ExtentService;
 
-import excelUtilities.ExcelUtilities;
+import excelUtilities.ExcelUtility;
 import exceptions.FileDoesNotExistsException;
 import exceptions.InCorrectConfigConfigParameters;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
-import screenRecorderUtilities.ScreenRecorderUtil;
-import screenRecorderUtilities.ScreenRecorderUtil.TypeOfScreen;
+import screenRecorderUtilities.ScreenRecorderUtility;
+import screenRecorderUtilities.ScreenRecorderUtility.TypeOfScreen;
 
 @CucumberOptions(
-		features={".//src/test/resources/features/01 LoginPage.feature"},
+		features={".//src/test/resources/features/"},
 		//features=".//src/test/resources/features/04 SearchPage.feature",
-		glue={"stepDefinitions","AppHooks"},
+		glue={"stepDefinitions","appHooks"},
 		dryRun=false,
-		tags="@Custom",
+		tags="@Regression",
 		monochrome = true,		
 		plugin = {"pretty",
 					"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
@@ -57,8 +57,8 @@ public class TestRunner extends AbstractTestNGCucumberTests{
 		try {
 			int thresholdDays = 10;
 			String testClassName = getClassName();
-			ScreenRecorderUtil.startRecord(TypeOfScreen.RegularScreen,testClassName);
-			ScreenRecorderUtil.deleteOlderFilesAndDirectories(thresholdDays, TimeUnit.DAYS,".avi");	
+			ScreenRecorderUtility.startRecord(TypeOfScreen.RegularScreen,testClassName);
+			ScreenRecorderUtility.deleteOlderFilesAndDirectories(thresholdDays, TimeUnit.DAYS,".avi");	
 			logger.info("Screen Recording Started ..!!");
 
 			String path = System.getProperty("user.dir") + "\\src\\test\\resources\\testdata\\BDDFrameworkTestDriver.xlsx";
@@ -109,7 +109,7 @@ public class TestRunner extends AbstractTestNGCucumberTests{
 	@AfterSuite(alwaysRun = true)
 	public void afterSuite() {
 		try {
-			ScreenRecorderUtil.stopRecord();
+			ScreenRecorderUtility.stopRecord();
 			logger.info("Screen Recording Stopped ..!!");
 
 			//Gets the latest execution report
@@ -218,7 +218,7 @@ public class TestRunner extends AbstractTestNGCucumberTests{
 	 * @throws InCorrectConfigConfigParameters
 	 */
 	public static String geturl() throws InCorrectConfigConfigParameters  {
-		ExcelUtilities xlsUtil= new ExcelUtilities(System.getProperty("driverFilePath"));
+		ExcelUtility xlsUtil= new ExcelUtility(System.getProperty("driverFilePath"));
 		Sheet sheetObj = xlsUtil.getSheetObject("Config");
 		ArrayList<ArrayList<String>> urlList = xlsUtil.getMultipleColumnDataBasedOnOneColumnValue(sheetObj,"Attribute","Env-URL","Value");
 		if(urlList.size() == 0) {
