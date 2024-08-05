@@ -19,19 +19,20 @@ import org.openqa.selenium.WebDriver;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter;
+import com.aventstack.extentreports.service.ExtentService;
 
 import driverfactory.BrowserFactory;
 import driverfactory.DriverFactory;
+import helperTestUtility.ReportLogs;
 import helperUtility.ConfigReader;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
 public class ApplicationHooks {
-	
+
 	public static final Logger logger = LogManager.getLogger(ApplicationHooks.class); 
-	
-	private DriverFactory driverFactory;
+
 	public static WebDriver driver;
 	private ConfigReader configReader;
 	Properties prop;
@@ -44,13 +45,13 @@ public class ApplicationHooks {
 
 	static DateTimeFormatter twentyFourHourFormat = DateTimeFormatter.ofPattern("k-mm-ss a ");
 	public static String twentyFourHour = currentDateTime.format(twentyFourHourFormat).toString();
-	
+
 	static DateTimeFormatter twelveHourFormat = DateTimeFormatter.ofPattern("hh-mm-ss a ");
 	public static String twelveHour = currentDateTime.format(twelveHourFormat).toString();
-	
+
 	static DateTimeFormatter monthYearFormat = DateTimeFormatter.ofPattern("MMM YYYY");  
 	public static String monthYear = currentDateTime.format(monthYearFormat).toString(); 
-	
+
 	static DateTimeFormatter yearFormat = DateTimeFormatter.ofPattern("YYYY");  
 	public static String year = currentDateTime.format(yearFormat).toString(); 
 
@@ -60,25 +61,26 @@ public class ApplicationHooks {
 		configReader = new ConfigReader();
 		prop=configReader.init_prop();
 	}
- 
+
 	@Before(order=1)
 	public void launchBrowser(Scenario scenario) {
 		String browserName = prop.getProperty("browser");
 		DriverFactory.getInstance().setDriver(bf.createBrowserInstance(browserName));
 		driver = DriverFactory.getInstance().getDriver();
 		//driverFactory = new DriverFactory();
-        //driver=driverFactory.init_driver(browserName);
+		//driver=driverFactory.init_driver(browserName);
 	}
-
-//	@Before(order=2)
-//	public void getTestContext() {
-//		logger.info("In Before step");
-//	}
 	
+	//	@Before(order=2)
+	//	public void getTestContext() {
+	//		logger.info("In Before step");
+	//	}
+
 	@After(order=0)
 	public void quitBrowser() {
+		DriverFactory.getInstance().closeDriver();
 		logger.info("In After");
-		driver.quit();
+		//driver.quit();
 	}
 
 	@After(order=1)
@@ -93,17 +95,17 @@ public class ApplicationHooks {
 				e.printStackTrace();
 			}		
 		} 
-//		else {
-//			scenario.getStatus();
-//			if(io.cucumber.java.Status.SKIPPED != null) {
-//				String screenshotName = scenario.getName().replaceAll(" ", "_");
-//				ExtentCucumberAdapter.getCurrentStep().log(Status.SKIP,screenshotName +" "+twelveHour,MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshotAsBase64(driver)).build());
-//				ExtentCucumberAdapter.addTestStepLog("Screenshot is attached");
-//				captureScreenshotAsFile(screenshotName,driver);
-//			}
-//		}
+		//		else {
+		//			scenario.getStatus();
+		//			if(io.cucumber.java.Status.SKIPPED != null) {
+		//				String screenshotName = scenario.getName().replaceAll(" ", "_");
+		//				ExtentCucumberAdapter.getCurrentStep().log(Status.SKIP,screenshotName +" "+twelveHour,MediaEntityBuilder.createScreenCaptureFromBase64String(getScreenshotAsBase64(driver)).build());
+		//				ExtentCucumberAdapter.addTestStepLog("Screenshot is attached");
+		//				captureScreenshotAsFile(screenshotName,driver);
+		//			}
+		//		}
 	}
-	
+
 	/**
 	 * Get Screenshot As Base64
 	 * @param driver
@@ -112,7 +114,7 @@ public class ApplicationHooks {
 	public String getScreenshotAsBase64(WebDriver driver) {
 		return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BASE64);
 	}
-		
+
 	/**
 	 * Capture Screenshot As File
 	 * @param testMethodName
@@ -130,7 +132,7 @@ public class ApplicationHooks {
 		}
 		return captureScreenshotPath;
 	}
-		
+
 	/**
 	 * Capture Screenshot As Base64
 	 * @param testMethodName

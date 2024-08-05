@@ -36,8 +36,8 @@ import screenRecorderUtilities.ScreenRecorderUtility;
 import screenRecorderUtilities.ScreenRecorderUtility.TypeOfScreen;
 
 @CucumberOptions(
-		features={".//src/test/resources/features/"},
-		//features=".//src/test/resources/features/04 SearchPage.feature",
+		//features={".//src/test/resources/features/"},
+		features=".//src/test/resources/features/01 LoginPage.feature",
 		glue={"stepDefinitions","appHooks"},
 		dryRun=false,
 		tags="@Regression",

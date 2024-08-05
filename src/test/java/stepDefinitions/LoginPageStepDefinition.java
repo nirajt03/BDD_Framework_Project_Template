@@ -1,17 +1,20 @@
 package stepDefinitions;
 
-import pageObjectModels.LoginPage;
-import pageObjectModels.SearchPage;
-
 import static org.testng.Assert.assertEquals;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.Assert;
+
+import com.aventstack.extentreports.Status;
 
 import driverfactory.DriverFactory;
+import helperTestUtility.ReportLogs;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageObjectModels.LoginPage;
+import pageObjectModels.SearchPage;
 
 public class LoginPageStepDefinition {
 
@@ -27,11 +30,13 @@ public class LoginPageStepDefinition {
 	@Given("Login form should be visible on launch application URL")
 	public void login_form_should_be_visible_on_launch_application_url() {
 		loginpage.waitForLoginFormToBeVisible();
+		ReportLogs.addLog(Status.INFO, "Login Form is Visible");
 	}
 
 	@When("User login as {string}")
 	public void user_login_as(String authority) {
 		searchpage = loginpage.loginToPluralsightApplication(authority);
+		ReportLogs.addLog(Status.INFO, "User Logged in as "+authority);
 	}
 
 	@Then("Verify Search page has displayed after login and verify search box text as {string}")
@@ -44,6 +49,8 @@ public class LoginPageStepDefinition {
 	@Then("Logout from Pluralsight clone application")
 	public void logout_from_pluralsight_clone_application() {
 		loginpage = loginpage.logoutFromPluralsightApplication();
+		ReportLogs.addLogWithMarkUp(Status.INFO, "Logged out from Pluralsight Application");
+		ReportLogs.addLogWithScreenshot(Status.INFO, "Logged out from Pluralsight Application");
 	}
 
 	@When("User should enter credentials as {string} and {string}")
