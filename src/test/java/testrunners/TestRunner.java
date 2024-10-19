@@ -40,7 +40,7 @@ import screenRecorderUtilities.ScreenRecorderUtility.TypeOfScreen;
 		features=".//src/test/resources/features/01 LoginPage.feature",
 		glue={"stepDefinitions","appHooks"},
 		dryRun=false,
-		tags="@Regression",
+		tags="@Custom",
 		monochrome = true,		
 		plugin = {"pretty",
 					"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",

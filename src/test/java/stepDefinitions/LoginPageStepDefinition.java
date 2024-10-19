@@ -2,14 +2,16 @@ package stepDefinitions;
 
 import static org.testng.Assert.assertEquals;
 
+import java.util.Map;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.testng.Assert;
 
 import com.aventstack.extentreports.Status;
 
 import driverfactory.DriverFactory;
 import helperTestUtility.ReportLogs;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -56,7 +58,7 @@ public class LoginPageStepDefinition {
 
 	@When("User should enter credentials as {string} and {string}")
 	public void user_should_enter_credentials_as_and(String username, String password) {
-        loginpage.checkNegativeLoginScenarios(username, password);
+		loginpage.checkNegativeLoginScenarios(username, password);
 		ReportLogs.addLogWithScreenshot(Status.INFO, "Checked Negative Login Scenario for Pluralsight Application");
 
 	}
@@ -68,5 +70,34 @@ public class LoginPageStepDefinition {
 		//Assert.assertFalse(true);
 		assertEquals(loginErrorMsg, errorMessage, "Failed to assert Login Error message for nagative scenario");
 	}
+
+//	@Then("User should enter other credentials as Username and Password")
+//	public void user_should_enter_other_credentials_as_username_and_password(DataTable userCredentials) {
+//		for(Map<String, String> data : userCredentials.asMaps(String.class, String.class)) {
+//			loginpage.checkNegativeLoginScenarios(data.get("Username"), data.get("Password"));
+//			ReportLogs.addLogWithScreenshot(Status.INFO, "Checked Negative Login Scenario for Pluralsight Application");
+//		}
+//	}
+//	
+//	@Then("Verify login error message as Error Message")
+//	public void verify_login_error_message_as_error_message(DataTable errorMessages) {
+//		for(Map<String, String> data : errorMessages.asMaps(String.class, String.class)) {
+//			String loginErrorMsg = loginpage.getLoginErrorText();
+//			ReportLogs.addLogForStringComparison(loginErrorMsg, data.get("Error Message"),"Validated login error message");
+//			assertEquals(loginErrorMsg, data.get("Error Message"), "Failed to assert Login Error message for nagative scenario");
+//		}
+//	}
+	
+	@Then("User should enter other credentials as Username and Password, verify login error message as Error Message")
+	public void user_should_enter_other_credentials_as_username_and_password_verify_login_error_message_as_error_message(DataTable userCredentials) {
+		for(Map<String, String> data : userCredentials.asMaps(String.class, String.class)) {
+			loginpage.checkNegativeLoginScenarios(data.get("Username"), data.get("Password"));
+			ReportLogs.addLogWithScreenshot(Status.INFO, "Checked Negative Login Scenario for Pluralsight Application");
+			String loginErrorMsg = loginpage.getLoginErrorText();
+			ReportLogs.addLogForStringComparison(loginErrorMsg, data.get("Error Message"),"Validated login error message");
+			assertEquals(loginErrorMsg, data.get("Error Message"), "Failed to assert Login Error message for nagative scenario");
+		}
+	}
+
 
 }

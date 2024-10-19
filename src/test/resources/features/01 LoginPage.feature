@@ -4,7 +4,7 @@ Feature: Login Functionality for Pluralsight Clone Application
   Background: 
     Given User launches the Pluralsight Clone Application using link "https://nirajt03.github.io/sample-website/"
 
-  @Custom
+  
   Scenario Outline: Verify login functionality (TCs-001,TCs-002,TCs-003)
     Given Login form should be visible on launch application URL
     When User login as "<Authority>"
@@ -28,3 +28,13 @@ Feature: Login Functionality for Pluralsight Clone Application
       |          |             | Invalid user name or password |
       | admin    |             | Invalid user name or password |
       |          | password123 | Invalid user name or password |
+
+  @Custom
+  Scenario Outline: Verify Negative Login functionality with Data Table (TCs-006,TCs-007,TCs-008)
+    When Login form should be visible on launch application URL
+    Then User should enter other credentials as Username and Password, verify login error message as Error Message
+      | Username | Password    | Error Message                 |
+      | notadmin | password123 | Invalid user name or password |
+      | admin    | notpassword | Invalid user name or password |
+  
+    
